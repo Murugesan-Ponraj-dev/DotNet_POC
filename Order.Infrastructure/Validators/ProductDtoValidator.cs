@@ -1,16 +1,13 @@
 ﻿using FluentValidation;
 using Order.Domain.DTOs;
 
-namespace Order.Infrastructure.Validators
+namespace Order.Infrastructure.Validators;
+public class ProductDtoValidator : AbstractValidator<ProductDTO>
 {
-    public class ProductDtoValidator : AbstractValidator<ProductDTO>
+    public ProductDtoValidator()
     {
-        public ProductDtoValidator()
-        {
-            RuleFor(x => x.Name).NotNull().NotEmpty();
-            RuleFor(x => x.Description).NotNull().NotEmpty();
-            RuleFor(x => x.Price).NotNull().NotEmpty();
-        }
-
+        RuleFor(x => x.Name).NotNull().NotEmpty();
+        RuleFor(x => x.Description).NotNull().NotEmpty();
+        RuleFor(x => x.Price).NotNull().NotEmpty();
     }
 }

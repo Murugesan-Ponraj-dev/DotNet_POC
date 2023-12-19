@@ -1,5 +1,4 @@
-﻿namespace Order.Domain.DTOs
-{
+﻿namespace Order.Domain.DTOs;
     public class ProductDTO
     {
         public int Id { get; set; }
@@ -11,4 +10,4 @@
         public decimal? Price { get; set; }
 
     }
-}
+

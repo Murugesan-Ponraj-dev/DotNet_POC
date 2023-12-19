@@ -5,6 +5,7 @@
     /// </summary>
     public static class WebApiRouteContant
     {
-        public const string CreateProductURL = "api/[controller]";
+        public const string ProductControllerURL = "api/[controller]";
+        public const string CreateProductRoute = "CreateProduct";
     }
 }

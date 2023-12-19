@@ -1,6 +1,5 @@
-﻿namespace Order.Domain.Common.Resources
+﻿namespace Order.Domain.Common.Resources;
+
+public class MessageResources
 {
-    public class MessageResources
-    {
-    }
 }

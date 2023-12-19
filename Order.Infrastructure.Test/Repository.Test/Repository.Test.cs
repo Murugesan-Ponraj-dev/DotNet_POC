@@ -1,19 +1,17 @@
-﻿namespace Order.Infrastructure.Test.Repository.Test
+﻿namespace Order.Infrastructure.Test.Repository.Test;
+public class RepositoryTest
 {
-    public class RepositoryTest
+    public RepositoryTest() { }
+
+    [Fact]
+    public void Should_Return_SuccessOn_DbSave()
     {
-        public RepositoryTest() { }
+        throw new NotImplementedException();
+    }
 
-        [Fact]
-        public void Should_Return_SuccessOn_DbSave()
-        {
-
-        }
-
-        [Fact]
-        public void Should_Fail_DbSave()
-        {
-
-        }
+    [Fact]
+    public void Should_Fail_On_DbSave() 
+    {
+        throw new NotImplementedException();
     }
 }

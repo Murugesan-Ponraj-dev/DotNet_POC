@@ -1,5 +1,5 @@
-﻿namespace Order.Domain.Entities
-{
+﻿namespace Order.Domain.Entities;
+
     public class Product
     {
         public int Id { get; set; }
@@ -10,4 +10,3 @@
 
         public decimal? Price { get; set; }
     }
-}

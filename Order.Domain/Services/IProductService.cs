@@ -1,11 +1,10 @@
-﻿namespace Order.Domain.Services
+﻿using Order.Domain.DTOs;
+using Order.Domain.EntityResponse;
+
+namespace Order.Domain.Services;
+public interface IProductService
 {
-    using Order.Domain.Common;
-    using Order.Domain.DTOs;
+    Task<ProductResponse> CreateProduct(ProductDTO productDTO);
 
-    public interface IProductService
-    {
-        Task<ApiResponse<bool>> CreateProduct(ProductDTO productDTO);
-
-    }
 }
+

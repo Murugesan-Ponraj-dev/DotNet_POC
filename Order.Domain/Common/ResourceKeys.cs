@@ -1,24 +1,23 @@
-﻿namespace Order.Domain.Common
+﻿namespace Order.Domain.Common;
+public static class ResourceKeys
 {
-    public static class ResourceKeys
-    {
-        #region Resource
-        public const string SystemMsgResrceName = "Order.Domain.Common.Resources.MessageResources";
-        public const string ResourceManagerFileError = "Unable to fetch Resource manger";
-        #endregion
+    #region Resource
+    public const string SystemMsgResrceName = "Order.Domain.Common.Resources.MessageResources";
+    public const string ResourceManagerFileError = "Unable to fetch Resource manger";
+    #endregion
 
-        #region Common
+    #region Common
 
-        public const string NullReferenceError = "NullReferenceError";      
+    public const string NullReferenceError = "NullReferenceError"; 
 
-        #endregion
+    #endregion
 
-        #region Product
+    #region Product
 
-        public const string ProductSuccess = "ProductSuccess";
-        public const string ProductFailure = "ProductFailure";
+    public const string ProductSuccess = "ProductSuccess";
+    public const string ProductFailure = "ProductFailure";
 
-        #endregion               
+    #endregion
 
-    }
 }
+

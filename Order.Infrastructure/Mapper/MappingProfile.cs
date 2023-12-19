@@ -2,15 +2,12 @@
 using Order.Domain.DTOs;
 using Order.Domain.Entities;
 
-namespace Order.Infrastructure.Mapper
+namespace Order.Infrastructure.Mapper;
+public class MappingProfile : Profile
 {
-    public class MappingProfile : Profile
+    public MappingProfile()
     {
-        public MappingProfile()
-        {
-
-            CreateMap<ProductDTO, Product>().ReverseMap();
-        }
-
+        CreateMap<ProductDTO, Product>().ReverseMap();
     }
+
 }
