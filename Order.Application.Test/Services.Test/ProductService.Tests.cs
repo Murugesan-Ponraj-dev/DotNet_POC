@@ -17,6 +17,7 @@ namespace Order.Application.Test.Services.Test;
 public class ProductServiceTest
 {
     private readonly ProductDTO _request;
+    private readonly Product _product;
     private readonly ProductService _service;
     private readonly Mock<IProductRepository> _productRepository;
     private readonly Mock<IMapper> _iMapper;
@@ -24,7 +25,7 @@ public class ProductServiceTest
     private readonly string productSuccessMsg;
     private readonly string productFailureMsg;
     private readonly string nullReferenceErrorMgs;
- 
+  
 
     public ProductServiceTest()
     {
@@ -33,6 +34,7 @@ public class ProductServiceTest
         _productRepository = new Mock<IProductRepository>(); 
         _service = new ProductService(_productRepository.Object, _iMapper.Object, _ResourceManager.Object);       
         _request = new ProductDTO() { Name = RandomDataGenerator.GetRandomText(), Description = RandomDataGenerator.GetRandomText(), Price = RandomDataGenerator.GetRandomIntValue() };
+        _product = new Product() { Name = RandomDataGenerator.GetRandomText(), Description = RandomDataGenerator.GetRandomText(), Price = RandomDataGenerator.GetRandomIntValue() };
         NullReferenceException exception = new NullReferenceException();
         nullReferenceErrorMgs = exception.Message;  
         
@@ -40,18 +42,22 @@ public class ProductServiceTest
         var resourceManager = new ResourceManager(ResourceKeys.SystemMsgResrceName, typeof(MessageResources).Assembly);
         productSuccessMsg = resourceManager?.GetString(ResourceKeys.ProductSuccess) ?? string.Empty;       
         productFailureMsg = resourceManager?.GetString(ResourceKeys.ProductFailure) ?? string.Empty;
+        //Common setup
+        _ResourceManager.Setup(a => a.GetResourceValue<MessageResources>(ResourceKeys.SystemMsgResrceName, ResourceKeys.ProductSuccess)).Returns(productSuccessMsg);
+        _ResourceManager.Setup(a => a.GetResourceValue<MessageResources>(ResourceKeys.SystemMsgResrceName, ResourceKeys.ProductFailure)).Returns(productFailureMsg);
+        _iMapper.Setup(a => a.Map<Product>(_request)).Returns(_product);
+
     }
 
     [Fact]
     public void Should_ReturnSuccessRespone_OnDBSave()
     {
         //Arrange           
-        _productRepository.Setup(a => a.CreateProduct(It.IsAny<Product>())).Returns(true);
-        _iMapper.Setup(a => a.Map<ProductDTO, Product>(It.IsAny<ProductDTO>())).Returns(It.IsAny<Product>());
-        _ResourceManager.Setup(a => a.GetResourceValue<MessageResources>(It.IsAny<string>(), It.IsAny<string>())).Returns(productSuccessMsg);
-
+        _productRepository.Setup(a => a.CreateProduct(_product)).Returns(true);
+        
+      
         //Act
-         var response = _service.CreateProduct(_request);
+        var response = _service.CreateProduct(_request);
 
         //Assert
         if (response is null)
@@ -64,10 +70,8 @@ public class ProductServiceTest
     public void Should_ReturnFailureResponse_OnDBFaileToSave()
     {
         //Arrange            
-        _productRepository.Setup(a => a.CreateProduct(It.IsAny<Product>())).Returns(false);
-        _iMapper.Setup(a => a.Map<ProductDTO, Product>(It.IsAny<ProductDTO>())).Returns(It.IsAny<Product>());
-        _ResourceManager.Setup(a => a.GetResourceValue<MessageResources>(It.IsAny<string>(), It.IsAny<string>())).Returns(productFailureMsg);
-
+        _productRepository.Setup(a => a.CreateProduct(_product)).Returns(false);
+    
         //Act
         var response = _service.CreateProduct(_request);
 
@@ -84,8 +88,8 @@ public class ProductServiceTest
     {
         //Arrange    
        // Remove Setup file for product repo
-        _productRepository.Setup(a => a.CreateProduct(It.IsAny<Product>())).Returns(false);
-        _ResourceManager.Setup(a => a.GetResourceValue<MessageResources>(It.IsAny<string>(), It.IsAny<string>())).Returns(productFailureMsg);
+        _productRepository.Setup(a => a.CreateProduct(_product)).Returns(false);
+      //  _ResourceManager.Setup(a => a.GetResourceValue<MessageResources>(It.IsAny<string>(), It.IsAny<string>())).Returns(productFailureMsg);
         // set mapper object as null
         IMapper? resourceObject = null;
         var service = new ProductService(_productRepository.Object, resourceObject, _ResourceManager.Object);

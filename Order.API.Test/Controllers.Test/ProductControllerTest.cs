@@ -31,7 +31,7 @@ public class ProductControllerTest
     {
         //Arrange
         var mockApiResponse = new ProductResponse() { IsSuccess = true, Message = productSuccessMsg, Result = _request };
-        _productService.Setup(a => a.CreateProduct(It.IsAny<ProductDTO>())).ReturnsAsync(mockApiResponse);
+        _productService.Setup(a => a.CreateProduct(_request)).ReturnsAsync(mockApiResponse);
 
 
         //Act

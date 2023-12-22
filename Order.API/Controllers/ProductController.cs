@@ -6,7 +6,7 @@ using Order.Domain.Services;
 
 namespace Order.API.Controllers;
 
-[Route(WebApiRouteContant.ProductControllerURL)]
+[Route(WebApiRouteContent.ProductControllerURL)]
 [ApiController]
 public class ProductController : ControllerBase
 {
@@ -21,15 +21,7 @@ public class ProductController : ControllerBase
         _productService = productService;
     }
 
-    /// <summary>
-    /// Create Product.
-    /// </summary>
-    /// <param name="productDTO"> Request data </param>
-    /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-    [Route(WebApiRouteContant.CreateProductRoute)]
-    [HttpPost] 
-    [ProducesResponseType(typeof(ProductResponse), StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(ProblemDetails),StatusCodes.Status400BadRequest)]     
+   
     public async Task<ProductResponse> Post(ProductDTO productDTO)
     {
         return await _productService.CreateProduct(productDTO).ConfigureAwait(false);
