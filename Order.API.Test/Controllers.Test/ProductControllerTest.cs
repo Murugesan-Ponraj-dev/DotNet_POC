@@ -27,7 +27,7 @@ public class ProductControllerTest
     }
 
     [Fact]
-    public void Should_Controller_ReturnSuccess_ProductService_Save()
+    public void Should_ReturnSuccessRespone_On_ServiceSuccess()
     {
         //Arrange
         var mockApiResponse = new ProductResponse() { IsSuccess = true, Message = productSuccessMsg, Result = _request };
@@ -44,7 +44,7 @@ public class ProductControllerTest
     }
 
     [Fact]
-    public void Should_Controller_ReturnFailure_On_ProductService_FailToSave()
+    public void Should_ReturnFailureResponse_On_ProductServiceFailure()
     {
         //Arrange
          var mockapiResponse = new ProductResponse() { IsSuccess = false, Message = productFailureMsg, Result = null };
