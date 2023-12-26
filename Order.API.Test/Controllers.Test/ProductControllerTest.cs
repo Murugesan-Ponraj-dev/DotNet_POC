@@ -27,7 +27,7 @@ public class ProductControllerTest
     }
 
     [Fact]
-    public void Should_ReturnSuccessRespone_On_ServiceSuccess()
+    public void Should_ReturnSuccessResponse_On_ServiceSuccess()
     {
         //Arrange
         var mockApiResponse = new ProductResponse() { IsSuccess = true, Message = productSuccessMsg, Result = _request };

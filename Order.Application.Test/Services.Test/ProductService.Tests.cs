@@ -50,7 +50,7 @@ public class ProductServiceTest
     }
 
     [Fact]
-    public void Should_ReturnSuccessRespone_OnDBSave()
+    public void Should_ReturnSuccessResponse_OnDBSave()
     {
         //Arrange           
         _productRepository.Setup(a => a.CreateProduct(_product)).Returns(true);
@@ -67,7 +67,7 @@ public class ProductServiceTest
     }
 
     [Fact]
-    public void Should_ReturnFailureResponse_OnDBFaileToSave()
+    public void Should_ReturnFailureResponse_OnDBFailToSave()
     {
         //Arrange            
         _productRepository.Setup(a => a.CreateProduct(_product)).Returns(false);
