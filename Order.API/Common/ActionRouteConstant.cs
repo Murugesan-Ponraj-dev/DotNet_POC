@@ -6,4 +6,5 @@
 public static class ActionRouteConstant
 {
     public const string CreateProductRoute = "CreateProduct";
+    public const string GetAllProducts = "GetAllProducts";
 }

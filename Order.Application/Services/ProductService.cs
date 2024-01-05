@@ -6,6 +6,7 @@ using Order.Domain.Entities;
 using Order.Domain.EntityResponse;
 using Order.Domain.Repositories;
 using Order.Domain.Services;
+using System.Collections.Generic;
 
 namespace Order.Application.Services;
 
@@ -42,9 +43,9 @@ public class ProductService : IProductService
             }
             string successMesage = _resourceManager.GetResourceValue<MessageResources>(ResourceKeys.SystemMsgResrceName, ResourceKeys.ProductSuccess);
             string failureMessage = _resourceManager.GetResourceValue<MessageResources>(ResourceKeys.SystemMsgResrceName, ResourceKeys.ProductFailure);
-            var product = _mapper.Map<Product>(productDTO);
-            bool isSuccess = _productRepository.CreateProduct(product);
-            if (!isSuccess)
+            var productEntity = _mapper.Map<Product>(productDTO);
+            var product = _productRepository.CreateProduct(productEntity);
+            if (product != null && string.IsNullOrEmpty(product.Id))
                 productResponse.Fail(failureMessage);
             else
                 productResponse.Success(productDTO, successMesage);
@@ -54,6 +55,23 @@ public class ProductService : IProductService
         {
             productResponse.Fail(ex.Message);
             return Task.FromResult(productResponse);
+        }
+    }
+
+    public Task<IEnumerable<ProductDTO>> GetAllProducts()
+    {
+        IEnumerable<ProductDTO> productList = new List<ProductDTO>();
+        try 
+        {
+            var products= _productRepository.GetAllProduct();
+            if (products is null && products.Count() == 0)
+                return Task.FromResult(productList);
+            var productEntity = _mapper.Map<IEnumerable<Product>>(products);
+            return Task.FromResult(productList);
+        }
+        catch (Exception)
+        {           
+            return Task.FromResult(productList);
         }
     }
 }

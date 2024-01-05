@@ -35,5 +35,14 @@ public class ProductController : ControllerBase
     {
         return await _productService.CreateProduct(productDTO).ConfigureAwait(false);
     }
+
+    [Route(ActionRouteConstant.GetAllProducts)]
+    [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<ProductDTO>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    public async Task<IEnumerable<ProductDTO>> GetAllProducts ()
+    {
+        return await _productService.GetAllProducts();
+    }
 }
 

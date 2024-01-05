@@ -53,7 +53,7 @@ public class ProductServiceTest
     public void Should_ReturnSuccessResponse_OnDBSave()
     {
         //Arrange           
-        _productRepository.Setup(a => a.CreateProduct(_product)).Returns(true);
+        _productRepository.Setup(a => a.CreateProduct(_product)).Returns(_product);
         
       
         //Act
@@ -70,7 +70,7 @@ public class ProductServiceTest
     public void Should_ReturnFailureResponse_OnDBFailToSave()
     {
         //Arrange            
-        _productRepository.Setup(a => a.CreateProduct(_product)).Returns(false);
+        _productRepository.Setup(a => a.CreateProduct(_product)).Returns(_product);
     
         //Act
         var response = _service.CreateProduct(_request);
@@ -88,7 +88,7 @@ public class ProductServiceTest
     {
         //Arrange    
        // Remove Setup file for product repo
-        _productRepository.Setup(a => a.CreateProduct(_product)).Returns(false);
+        _productRepository.Setup(a => a.CreateProduct(_product)).Returns(_product);
       //  _ResourceManager.Setup(a => a.GetResourceValue<MessageResources>(It.IsAny<string>(), It.IsAny<string>())).Returns(productFailureMsg);
         // set mapper object as null
         IMapper? resourceObject = null;
