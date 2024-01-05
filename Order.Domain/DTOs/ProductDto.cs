@@ -1,7 +1,7 @@
 ﻿namespace Order.Domain.DTOs;
     public class ProductDTO
     {
-        public int Id { get; set; }
+        public string? Id { get; set; }
 
         public string? Name { get; set; }
 

@@ -5,6 +5,6 @@ namespace Order.Domain.Services;
 public interface IProductService
 {
     Task<ProductResponse> CreateProduct(ProductDTO productDTO);
-
+    Task<IEnumerable<ProductDTO>> GetAllProducts();
 }
 
