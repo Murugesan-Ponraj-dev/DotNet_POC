@@ -35,5 +35,28 @@ public class ProductController : ControllerBase
     {
         return await _productService.CreateProduct(productDTO).ConfigureAwait(false);
     }
+
+    [Route(ActionRouteConstant.GetAllProducts)]
+    [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<ProductDTO>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    public async Task<IEnumerable<ProductDTO>> GetAllProducts ()
+    {
+        return await _productService.GetAllProducts();
+    }
+
+    /// <summary>
+    /// get filtered data
+    /// </summary>
+    /// <param name="filterQueryRequest"></param>
+    /// <returns></returns>
+    [Route(ActionRouteConstant.GetAllFilteredProducts)]
+    [HttpPost]
+    [ProducesResponseType(typeof(IEnumerable<ProductDTO>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    public async Task<IEnumerable<ProductDTO>> GetAllFilteredProducts(FilterQueryRequest filterQueryRequest)
+    {
+        return await _productService.GetFilteredData(filterQueryRequest).ConfigureAwait(false);
+    }
 }
 
