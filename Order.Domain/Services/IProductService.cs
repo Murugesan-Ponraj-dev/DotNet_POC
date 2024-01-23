@@ -6,5 +6,6 @@ public interface IProductService
 {
     Task<ProductResponse> CreateProduct(ProductDTO productDTO);
     Task<IEnumerable<ProductDTO>> GetAllProducts();
+    Task<IEnumerable<ProductDTO>> GetFilteredData(FilterQueryRequest filterQueryRequest);
 }
 
